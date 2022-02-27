@@ -1,22 +1,23 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
 
-const AddType = ({show, onHide}) => {
+const CreateType = ({show, onHide}) => {
     return (
         <Modal
             show = {show}
             onHide = {onHide}
-            size="lg"
             centered
         >
-            <Modal.Header closeButton>
+            <Modal.Header>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Add type
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    <Form.Control placeholder={"Input type name"}/>
+                    <Form.Control
+                        placeholder={"Input type name..."}
+                    />
                 </Form>
             </Modal.Body>
             <Modal.Footer>
@@ -27,4 +28,4 @@ const AddType = ({show, onHide}) => {
     );
 };
 
-export default AddType;
+export default CreateType;
