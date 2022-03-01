@@ -4,7 +4,8 @@ const jwt = require('jsonwebtoken')
 const {User, Basket} = require('../models/models')
 
 const generateJwt = (id, email, role) => {
-    return  jwt.sign({id, email, role},
+    return  jwt.sign(
+        {id, email, role},
         process.env.SECRET_KEY,
         {expiresIn: '24h'}
     )
@@ -18,7 +19,7 @@ class UserController{
             return next(ApiError.badRequest('Wrong email or password!'))
         }
         const candidate = await User.findOne({where: {email}})
-        if(email){
+        if(candidate){
             return next(ApiError.badRequest('User with such mail already exists!'))
         }
         const hashPassword = await bcrypt.hash(password, 5)

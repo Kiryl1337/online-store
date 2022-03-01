@@ -6,9 +6,13 @@ import {observer} from "mobx-react-lite";
 import {NavLink} from "react-router-dom";
 import {useNavigate} from "react-router";
 
-const NavBar = observer( () => {
+const NavBar = observer(() => {
     const {user} = useContext(Context)
     const navigate = useNavigate()
+    const logOut = () => {
+        user.setUser({});
+        user.setIsAuth(false)
+    }
     return (
         <Navbar bg="dark" variant="dark">
             <Container>
@@ -24,7 +28,7 @@ const NavBar = observer( () => {
                         <Button
                             variant={'outline-light'}
                             className="ml-2"
-                            onClick={() => navigate(LOGIN_ROUTE)}
+                            onClick={() => logOut()}
                         >
                             Logout
                         </Button>
@@ -33,10 +37,7 @@ const NavBar = observer( () => {
                     <Nav className="ml-auto">
                         <Button
                             variant={'outline-light'}
-                            onClick={() => {user.setIsAuth(true)
-                                            return navigate(REGISTRATION_ROUTE)
-                                            }
-                            }
+                            onClick={() => navigate(LOGIN_ROUTE)}
                         >
                             Authorization
                         </Button>

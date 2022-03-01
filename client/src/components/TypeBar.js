@@ -17,7 +17,6 @@ const TypeBar = observer(() => {
                     {type.name}
                 </ListGroup.Item>
             )}
-
         </ListGroup>
     );
 });

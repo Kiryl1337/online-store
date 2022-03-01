@@ -1,15 +1,32 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Button, Col, Dropdown, Form, Modal, Row} from "react-bootstrap";
 import {Context} from "../../index";
+import {observer} from "mobx-react-lite";
+import {fetchBrands, fetchTypes} from "../../http/deviceAPI";
 
-const CreateDevice = ({show, onHide}) => {
+const CreateDevice = observer(({show, onHide}) => {
     const {device} = useContext(Context)
-    const [info, setInfo] = useState([]);
+    const [info, setInfo] = useState([])
+    const [name, setName] = useState('')
+    const [price, setPrice] = useState(0)
+    const [file, setFile] = useState(null)
+
+    useEffect(() => {
+        fetchTypes().then(data => device.setTypes(data))
+        fetchBrands().then(data => device.setBrands(data))
+    },[])
+
     const addInfo = () => {
         setInfo([...info, {title: '', description: '', number: Date.now()}] )
     }
     const deleteInfo = (number) => {
         setInfo(info.filter(i => i.number !== number))
+    }
+    const changeInfo = (key, value, number) => {
+        setInfo(info.map(i => i.number === number ? {...i, [key]: value} : i))
+    }
+    const selectedFile = e => {
+        setFile(e.target.files[0])
     }
     return (
         <Modal
@@ -27,18 +44,28 @@ const CreateDevice = ({show, onHide}) => {
                 <Form>
                     <Row>
                         <Dropdown className={"ml-3"}>
-                            <Dropdown.Toggle variant={"outline-info"}>Choose type</Dropdown.Toggle>
+                            <Dropdown.Toggle variant={"outline-info"}> {device.selectedType.name || 'Choose type'}</Dropdown.Toggle>
                             <Dropdown.Menu>
                                 {device.types.map(type =>
-                                    <Dropdown.Item key={type.id}>{type.name}</Dropdown.Item>
+                                    <Dropdown.Item
+                                        key={type.id}
+                                        onClick={() => device.setSelectedType(type)}
+                                    >
+                                        {type.name}
+                                    </Dropdown.Item>
                                 )}
                             </Dropdown.Menu>
                         </Dropdown>
                         <Dropdown className={"ml-3"}>
-                            <Dropdown.Toggle variant={"outline-info"}>Choose brand</Dropdown.Toggle>
+                            <Dropdown.Toggle variant={"outline-info"}> {device.selectedBrand.name || 'Choose brand'}</Dropdown.Toggle>
                             <Dropdown.Menu>
                                 {device.brands.map(brand =>
-                                    <Dropdown.Item key={brand.id}>{brand.name}</Dropdown.Item>
+                                    <Dropdown.Item
+                                        key={brand.id}
+                                        onClick={() => device.setSelectedBrand(brand)}
+                                    >
+                                        {brand.name}
+                                    </Dropdown.Item>
                                 )}
                             </Dropdown.Menu>
                         </Dropdown>
@@ -46,15 +73,20 @@ const CreateDevice = ({show, onHide}) => {
                     <Form.Control
                         className={"mt-3"}
                         placeholder={"Input device name"}
+                        value={name}
+                        onChange={e => setName(e.target.value)}
                     />
                     <Form.Control
                         className={"mt-3"}
                         placeholder={"Input device price"}
                         type={"number"}
+                        value={price}
+                        onChange={e => setPrice(Number(e.target.value))}
                     />
                     <Form.Control
                         className={"mt-3"}
                         type={"file"}
+                        onChange={selectedFile}
                     />
                     <hr/>
                     <Button variant={"outline-dark"} onClick={() => addInfo()}>Add new property</Button>
@@ -88,6 +120,6 @@ const CreateDevice = ({show, onHide}) => {
             </Modal.Footer>
         </Modal>
     );
-};
+});
 
 export default CreateDevice;
