@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Button, Col, Dropdown, Form, Modal, Row} from "react-bootstrap";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
-import {fetchBrands, fetchTypes} from "../../http/deviceAPI";
+import {createDevice, fetchBrands, fetchTypes} from "../../http/deviceAPI";
 
 const CreateDevice = observer(({show, onHide}) => {
     const {device} = useContext(Context)
@@ -27,6 +27,16 @@ const CreateDevice = observer(({show, onHide}) => {
     }
     const selectedFile = e => {
         setFile(e.target.files[0])
+    }
+    const addDevice = () => {
+        const formData = new FormData()
+        formData.append('name', name)
+        formData.append('price', `${price}`)
+        formData.append('img', file)
+        formData.append('brandId', device.selectedBrand.id)
+        formData.append('typeId', device.selectedType.id)
+        formData.append('info', JSON.stringify(info))
+        createDevice(formData).then(data => onHide())
     }
     return (
         <Modal
@@ -95,11 +105,15 @@ const CreateDevice = observer(({show, onHide}) => {
                             <Col md={4}>
                                 <Form.Control
                                     placeholder={"Input property name..."}
+                                    value={i.title}
+                                    onChange={e => changeInfo('title', e.target.value, i.number)}
                                 />
                             </Col>
                             <Col md={4}>
                                 <Form.Control
                                     placeholder={"Input property description..."}
+                                    value={i.description}
+                                    onChange={e => changeInfo('description', e.target.value, i.number)}
                                 />
                             </Col>
                             <Col md={4}>
@@ -115,7 +129,7 @@ const CreateDevice = observer(({show, onHide}) => {
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant={"outline-success"} onClick={onHide}>Add</Button>
+                <Button variant={"outline-success"} onClick={addDevice}>Add</Button>
                 <Button variant={"outline-danger"} onClick={onHide}>Close</Button>
             </Modal.Footer>
         </Modal>
