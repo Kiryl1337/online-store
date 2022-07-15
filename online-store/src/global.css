@@ -81,6 +81,12 @@ html {
   width: 100%;
 }
 
+@media screen and (max-width:1024px) {
+	.filters {
+		grid-template-columns: repeat(1, 1fr)
+	}
+}
+
 .filter-block {
 	display: flex;
 	flex-direction: column;
@@ -290,10 +296,6 @@ html {
 	display: block;
 }
 
-.filter-name {
-	margin-bottom: 20px;
-}
-
 .search {
 	border: 1px solid #74b09f;
 	border-radius: 20px;
@@ -303,8 +305,30 @@ html {
 	padding-left: 10px;
 }
 
+.search-wrapper {
+	position: relative;
+}
+
 .search:focus-visible {
 	outline: none;
+}
+
+.clear-search {
+	background-image: url(./assets/images/close.svg);
+	background-repeat: no-repeat;
+	background-size: 20px;
+	cursor: pointer;
+	font-size: 0;
+	height: 20px;
+	position: absolute;
+	right: 10px;
+	top: 12px;
+	width: 20px;
+	display: none;
+}
+
+.clear-search.visible {
+	display: block;
 }
 
 .sort-select {
@@ -337,12 +361,30 @@ html {
 }
 
 .store-cards {
+	position: relative;
 	grid-gap: 20px;
 	display: grid;
 	grid-template-columns: repeat(5,1fr);
 	margin: auto;
-	width: 100%;
 	width: 96%;
+}
+
+@media screen and (max-width:1420px) {
+	.store-cards {
+		grid-template-columns: repeat(4, 1fr)
+	}
+}
+
+@media screen and (max-width:1125px) {
+	.store-cards {
+		grid-template-columns: repeat(3, 1fr)
+	}
+}
+
+@media screen and (max-width:768px) {
+	.store-cards {
+		grid-template-columns: repeat(2, 1fr)
+	}
 }
 
 .store-card {

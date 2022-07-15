@@ -14,11 +14,11 @@
                 <nav class="nav">
                     <h1>Online Store</h1>
                 </nav>
-                <div class="basket" title="Basket"><span>0</span></div>
+                <div class="basket" title="Basket"><span class="basket-counter">0</span></div>
                 </div>
             </header>
             <main>
-                <div class="main-wrapper">
+               <div class="main-wrapper">
                    <div class="main-container">
                       <div class="filters">
                          <div class="filter-block">
@@ -43,7 +43,7 @@
                                     <label for="type-game-checkbox" class="filter-type__button type-game">Игровой</label>
                                     <input type="checkbox" class="type-classic-input" id="type-classic-checkbox">
                                     <label for="type-classic-checkbox" class="filter-type__button type-classic">Классический</label>
-                                 </div>
+                                  </div>
                                </div>
                                <div class="filter-color">
                                   Цвет:
@@ -54,14 +54,14 @@
                                      <label for="color-white-checkbox" class="filter-color__button color-white"></label>
                                      <input type="checkbox" class="color-gray-input" id="color-gray-checkbox">
                                      <label for="color-gray-checkbox" class="filter-color__button color-gray"></label>
-                                   </div>
+                                  </div>
                                </div>
                                <div class="filter-popular">
                                   Только популярные:
                                   <div>
                                     <input type="checkbox" class="popular-input" id="popular-input">
                                     <label for="popular-input" class="popular-input-label"></label>
-                                 </div>
+                               </div>
                             </div>
                          </div>
                          <div class="filter-block">
@@ -94,32 +94,34 @@
                             </div>
                          </div>
                          <div class="filter-block">
-                            <div>
-                               <div class="filter-name">
-                                  <h5 class="title">Поиск</h5>
-                                  <div class="search-wrapper"><input placeholder="Введите текст" type="text" class="search" value="" autofocus></div>
-                               </div>
-                               <div class="sort-filter">
-                                 <h5 class="title">Сортировка</h5>
-                                 <select class="sort-select" name="sort" id="sort">
-                                   <option class="sort-option" value="down-name-sort">По названию, от А до Я</option>
-                                   <option class="sort-option" value="up-name-sort">По названию, от Я до А</option>
-                                   <option class="sort-option" value="up-year-sort">По году, по возрастанию</option>
-                                   <option class="sort-option" value="down-year-sort">По году, по убыванию</option>
-                                   <option class="sort-option" value="up-count-sort">По количеству, по возрастанию</option>
-                                   <option class="sort-option" value="down-count-sort">По количеству, по убыванию</option>
-                                 </select>
-                               </div>
-                               <div class="reset">
-                                 <button class="reset-filters">Сброс фильтров</button>
-                                 <button class="reset-settings">Сброс настроек</button>
-                                </div>
-                            </div>
+                           <div class="search-filter">
+                              <h5 class="title">Поиск</h5>
+                              <div class="search-wrapper">
+                                 <input placeholder="Введите текст" type="text" class="search" value="" autofocus>
+                                 <div class="clear-search"></div>
+                              </div>
+                           </div>
+                           <div class="sort-filter">
+                              <h5 class="title">Сортировка</h5>
+                              <select class="sort-select" name="sort" id="sort">
+                                 <option class="sort-option" value="down-name-sort">По названию, от А до Я</option>
+                                 <option class="sort-option" value="up-name-sort">По названию, от Я до А</option>
+                                 <option class="sort-option" value="up-year-sort">По году, по возрастанию</option>
+                                 <option class="sort-option" value="down-year-sort">По году, по убыванию</option>
+                                 <option class="sort-option" value="up-count-sort">По количеству, по возрастанию</option>
+                                 <option class="sort-option" value="down-count-sort">По количеству, по убыванию</option>
+                              </select>
+                           </div>
+                           <div class="reset">                           
+                              <button class="reset-filters">Сброс фильтров</button>
+                              <button class="reset-settings">Сброс настроек</button>
+                           </div>
                          </div>
                       </div>
-                </div>
-             </main>
-             <footer class="footer">
+                   </div>
+               </div>  
+            </main>
+            <footer class="footer">
                <div class="footer-container">
                   <div><a href="https://rs.school/" target="_blank" class="rs-link">RS School</a></div>
                   <div><a href="https://github.com/Kiryl1337/" target="_blank" class="github-link">Kiryl1337</a></div>
