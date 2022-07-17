@@ -12,7 +12,6 @@ class Filter {
 
     public filterCards(data: Array<cardItem>): void {
         const resultArray = [...data];
-
         renderNumArr = [];
         resultArray.forEach((item) => renderNumArr.push(Number(item.num) - 1));
         this.cardsView.createCards(renderNumArr);
