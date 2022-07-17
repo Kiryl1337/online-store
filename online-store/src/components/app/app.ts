@@ -21,13 +21,19 @@ class App {
         this.dataOnload();
 
         this.filter.filterCards(cards);
+
         this.countSlider.createCountSlider();
         this.yearSlider.createYearSlider();
-        this.search.searchInput(cards);
+
+        this.search.searchInput();
+        this.search.clearSearch();
     }
 
     public dataOnload(): void {
         this.search.searchElement.value = localStorage.getItem('searchInput') || '';
+        if (this.search.searchElement.value !== '') {
+            this.search.clearSearchElement?.classList.add('visible');
+        }
     }
 }
 
