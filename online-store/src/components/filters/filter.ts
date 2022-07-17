@@ -1,5 +1,6 @@
 import { cardItem } from '../../data/cards';
 import CardsView from '../cardsView/cardsView';
+import Color from './color';
 import Popular from './popular';
 import Search from './search';
 
@@ -20,6 +21,14 @@ class Filter {
                 item.name.toLowerCase().includes((Search.search as HTMLInputElement).value.toLowerCase())
             );
         }
+
+        Color.colorsArray = [];
+        Color.checkColors(
+            Color.colorWhiteCheckbox.checked,
+            Color.colorBlackCheckbox.checked,
+            Color.colorGrayCheckbox.checked
+        );
+        resultArray = resultArray.filter((item) => Color.colorsArray.includes(item.color));
 
         if (Popular.popularCheckbox.checked) {
             resultArray = resultArray.filter((item) => item.popular);
