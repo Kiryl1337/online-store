@@ -3,15 +3,13 @@ import CardsView from '../cardsView/cardsView';
 import Popular from './popular';
 import Search from './search';
 
-let renderNumArr: number[] = [];
-
 class Filter {
     private cardsView: CardsView;
-    private search: Search;
+    private renderNumArr: number[];
 
     constructor() {
         this.cardsView = new CardsView();
-        this.search = new Search();
+        this.renderNumArr = [];
     }
 
     public filterCards(data: Array<cardItem>): void {
@@ -26,9 +24,10 @@ class Filter {
         if (Popular.popularCheckbox.checked) {
             resultArray = resultArray.filter((item) => item.popular);
         }
-        renderNumArr = [];
-        resultArray.forEach((item) => renderNumArr.push(Number(item.num) - 1));
-        this.cardsView.createCards(renderNumArr);
+
+        this.renderNumArr = [];
+        resultArray.forEach((item) => this.renderNumArr.push(Number(item.num) - 1));
+        this.cardsView.createCards(this.renderNumArr);
     }
 }
 

@@ -1,4 +1,5 @@
 import { cards } from '../../data/cards';
+import CardsView from '../cardsView/cardsView';
 import Filter from '../filters/filter';
 import Popular from '../filters/popular';
 import Search from '../filters/search';
@@ -35,6 +36,14 @@ class App {
     }
 
     public dataOnload(): void {
+        const basketCard = localStorage.getItem('setBasketCard');
+        basketCard &&
+            JSON.parse(basketCard).forEach((item: number) => {
+                CardsView.setBasketCard.add(item.toString());
+            });
+
+        CardsView.basketCounter && (CardsView.basketCounter.innerHTML = CardsView.setBasketCard.size.toString());
+
         Search.search.value = localStorage.getItem('searchInput') || '';
         if (Search.search.value !== '') {
             Search.clearSearch?.classList.add('visible');

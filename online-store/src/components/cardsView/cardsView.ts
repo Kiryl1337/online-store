@@ -4,10 +4,11 @@ const NUMBER_TWENTY = 20;
 const storeCards = document.createElement('div');
 storeCards.className = 'store-cards';
 document.querySelector('.main-container')?.append(storeCards);
-const basketCounter = document.querySelector('.basket-counter');
-const setBasketCard = new Set<string>();
 
 class CardsView {
+    public static basketCounter = document.querySelector('.basket-counter');
+    public static setBasketCard = new Set<string>();
+
     public createCards(array: Array<number>): void {
         storeCards && (storeCards.innerHTML = '');
         if (array.length === 0) {
@@ -37,7 +38,7 @@ class CardsView {
                                                   }</span></li>
                                               </ul>                 
                                               `;
-                if (setBasketCard.has(cards[i].num)) {
+                if (CardsView.setBasketCard.has(cards[i].num)) {
                     storeCard.classList.add('add-to-basket');
                 }
                 storeCard.addEventListener('click', () => {
@@ -47,22 +48,22 @@ class CardsView {
         }
     }
     private checkCard(card: HTMLDivElement, cardsNum: string): void {
-        if (setBasketCard.has(cardsNum)) {
+        if (CardsView.setBasketCard.has(cardsNum)) {
             card.classList.remove('add-to-basket');
-            setBasketCard.delete(cardsNum);
+            CardsView.setBasketCard.delete(cardsNum);
         } else {
-            if (setBasketCard.size < NUMBER_TWENTY) {
+            if (CardsView.setBasketCard.size < NUMBER_TWENTY) {
                 card.classList.add('add-to-basket');
-                setBasketCard.add(cardsNum);
+                CardsView.setBasketCard.add(cardsNum);
             } else {
-                basketCounter?.classList.add('basket-alert');
+                CardsView.basketCounter?.classList.add('basket-alert');
                 setTimeout(() => {
-                    basketCounter?.classList.remove('basket-alert');
+                    CardsView.basketCounter?.classList.remove('basket-alert');
                 }, 2000);
             }
         }
-        basketCounter && (basketCounter.innerHTML = setBasketCard.size.toString());
-        localStorage.setItem('setBasketCard', JSON.stringify([...setBasketCard]));
+        CardsView.basketCounter && (CardsView.basketCounter.innerHTML = CardsView.setBasketCard.size.toString());
+        localStorage.setItem('setBasketCard', JSON.stringify([...CardsView.setBasketCard]));
     }
 }
 
