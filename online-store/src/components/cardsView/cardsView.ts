@@ -1,5 +1,6 @@
 import { cards } from '../../data/cards';
 
+const NUMBER_TWENTY = 20;
 const storeCards = document.createElement('div');
 storeCards.className = 'store-cards';
 document.querySelector('.main-container')?.append(storeCards);
@@ -36,8 +37,32 @@ class CardsView {
                                                   }</span></li>
                                               </ul>                 
                                               `;
+                if (setBasketCard.has(cards[i].num)) {
+                    storeCard.classList.add('add-to-basket');
+                }
+                storeCard.addEventListener('click', () => {
+                    this.checkCard(storeCard, cards[i].num);
+                });
             }
         }
+    }
+    private checkCard(card: HTMLDivElement, cardsNum: string): void {
+        if (setBasketCard.has(cardsNum)) {
+            card.classList.remove('add-to-basket');
+            setBasketCard.delete(cardsNum);
+        } else {
+            if (setBasketCard.size < NUMBER_TWENTY) {
+                card.classList.add('add-to-basket');
+                setBasketCard.add(cardsNum);
+            } else {
+                basketCounter?.classList.add('basket-alert');
+                setTimeout(() => {
+                    basketCounter?.classList.remove('basket-alert');
+                }, 2000);
+            }
+        }
+        basketCounter && (basketCounter.innerHTML = setBasketCard.size.toString());
+        localStorage.setItem('setBasketCard', JSON.stringify([...setBasketCard]));
     }
 }
 

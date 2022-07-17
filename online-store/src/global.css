@@ -52,15 +52,32 @@ html {
 	width: 50px;
 }
 
-.basket span {
+.basket-counter {
 	background-color: #fff;
 	border: 1px solid ;
 	border-radius: 50%;
+	width: 28px;
+	min-width: 20px;
 	display: inline-block;
 	font-size: 20px;
 	margin: 25px 0 0 40px;
-	min-width: 20px;
 	text-align: center;
+}
+
+.basket-alert::after {
+  content: 'Не более 20 товаров!';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+	right: 10px;
+	top: 60px;
+  width: 180px;
+  height: 30px;
+  background: #f00;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #fff;
 }
 
 .main-wrapper {
