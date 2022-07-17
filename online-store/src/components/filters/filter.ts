@@ -3,6 +3,7 @@ import CardsView from '../cardsView/cardsView';
 import Color from './color';
 import Popular from './popular';
 import Search from './search';
+import Type from './type';
 
 class Filter {
     private cardsView: CardsView;
@@ -21,6 +22,10 @@ class Filter {
                 item.name.toLowerCase().includes((Search.search as HTMLInputElement).value.toLowerCase())
             );
         }
+
+        Type.typesArray = [];
+        Type.checkTypes(Type.typeHomeCheckbox.checked, Type.typeGameCheckbox.checked, Type.typeClassicCheckbox.checked);
+        resultArray = resultArray.filter((item) => Type.typesArray.includes(item.type));
 
         Color.colorsArray = [];
         Color.checkColors(

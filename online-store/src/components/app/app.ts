@@ -4,6 +4,7 @@ import Color from '../filters/color';
 import Filter from '../filters/filter';
 import Popular from '../filters/popular';
 import Search from '../filters/search';
+import Type from '../filters/type';
 import CountSlider from '../sliders/countSlider';
 import YearSlider from '../sliders/yearSlider';
 
@@ -14,6 +15,7 @@ class App {
     private search: Search;
     private popular: Popular;
     private color: Color;
+    private type: Type;
 
     constructor() {
         this.filter = new Filter();
@@ -22,6 +24,7 @@ class App {
         this.search = new Search();
         this.popular = new Popular();
         this.color = new Color();
+        this.type = new Type();
     }
 
     start(): void {
@@ -36,8 +39,8 @@ class App {
         this.search.clearSearch();
 
         this.popular.popularFilter();
-
         this.color.colorsFilter();
+        this.type.typesFilter();
     }
 
     public dataOnload(): void {
@@ -53,6 +56,11 @@ class App {
         if (Search.search.value !== '') {
             Search.clearSearch?.classList.add('visible');
         }
+
+        Type.typeHomeCheckbox.checked = Boolean(localStorage.getItem('typeHomeCheckbox'));
+        Type.typeGameCheckbox.checked = Boolean(localStorage.getItem('typeGameCheckbox'));
+        Type.typeClassicCheckbox.checked = Boolean(localStorage.getItem('typeClassicCheckbox'));
+
         Color.colorWhiteCheckbox.checked = Boolean(localStorage.getItem('colorWhiteCheckbox'));
         Color.colorBlackCheckbox.checked = Boolean(localStorage.getItem('colorBlackCheckbox'));
         Color.colorGrayCheckbox.checked = Boolean(localStorage.getItem('colorGrayCheckbox'));
