@@ -5,6 +5,8 @@ import Popular from './popular';
 import Search from './search';
 import Type from './type';
 import Brand from './brand';
+import CountSlider from '../sliders/countSlider';
+import YearSlider from '../sliders/yearSlider';
 
 class Filter {
     private cardsView: CardsView;
@@ -47,6 +49,18 @@ class Filter {
         if (Popular.popularCheckbox.checked) {
             resultArray = resultArray.filter((item) => item.popular);
         }
+
+        resultArray = resultArray.filter(
+            (item) =>
+                Number(item.count) >= Number(CountSlider.minCountValue.innerHTML) &&
+                Number(item.count) <= Number(CountSlider.maxCountValue.innerHTML)
+        );
+
+        resultArray = resultArray.filter(
+            (item) =>
+                Number(item.year) >= Number(YearSlider.minYearValue.innerHTML) &&
+                Number(item.year) <= Number(YearSlider.maxYearValue.innerHTML)
+        );
 
         this.renderNumArr = [];
         resultArray.forEach((item) => this.renderNumArr.push(Number(item.num) - 1));
