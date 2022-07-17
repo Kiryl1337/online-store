@@ -1,5 +1,6 @@
 import { cardItem } from '../../data/cards';
 import CardsView from '../cardsView/cardsView';
+import Popular from './popular';
 import Search from './search';
 
 let renderNumArr: number[] = [];
@@ -16,10 +17,14 @@ class Filter {
     public filterCards(data: Array<cardItem>): void {
         let resultArray = [...data];
 
-        if (this.search.searchElement.value != '') {
+        if (Search.search.value != '') {
             resultArray = resultArray.filter((item) =>
-                item.name.toLowerCase().includes((this.search.searchElement as HTMLInputElement).value.toLowerCase())
+                item.name.toLowerCase().includes((Search.search as HTMLInputElement).value.toLowerCase())
             );
+        }
+
+        if (Popular.popularCheckbox.checked) {
+            resultArray = resultArray.filter((item) => item.popular);
         }
         renderNumArr = [];
         resultArray.forEach((item) => renderNumArr.push(Number(item.num) - 1));

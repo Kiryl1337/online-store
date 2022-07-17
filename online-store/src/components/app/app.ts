@@ -1,5 +1,6 @@
 import { cards } from '../../data/cards';
 import Filter from '../filters/filter';
+import Popular from '../filters/popular';
 import Search from '../filters/search';
 import CountSlider from '../sliders/countSlider';
 import YearSlider from '../sliders/yearSlider';
@@ -9,12 +10,14 @@ class App {
     private yearSlider: YearSlider;
     private countSlider: CountSlider;
     private search: Search;
+    private popular: Popular;
 
     constructor() {
         this.filter = new Filter();
         this.countSlider = new CountSlider();
         this.yearSlider = new YearSlider();
         this.search = new Search();
+        this.popular = new Popular();
     }
 
     start(): void {
@@ -27,13 +30,16 @@ class App {
 
         this.search.searchInput();
         this.search.clearSearch();
+
+        this.popular.popularFilter();
     }
 
     public dataOnload(): void {
-        this.search.searchElement.value = localStorage.getItem('searchInput') || '';
-        if (this.search.searchElement.value !== '') {
-            this.search.clearSearchElement?.classList.add('visible');
+        Search.search.value = localStorage.getItem('searchInput') || '';
+        if (Search.search.value !== '') {
+            Search.clearSearch?.classList.add('visible');
         }
+        Popular.popularCheckbox.checked = Boolean(localStorage.getItem('popularCheckbox'));
     }
 }
 
