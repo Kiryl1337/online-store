@@ -4,6 +4,7 @@ import Color from './color';
 import Popular from './popular';
 import Search from './search';
 import Type from './type';
+import Brand from './brand';
 
 class Filter {
     private cardsView: CardsView;
@@ -22,6 +23,14 @@ class Filter {
                 item.name.toLowerCase().includes((Search.search as HTMLInputElement).value.toLowerCase())
             );
         }
+
+        Brand.brandsArray = [];
+        Brand.checkBrands(
+            Brand.brandLenovoCheckbox.checked,
+            Brand.brandAsusCheckbox.checked,
+            Brand.brandHpCheckbox.checked
+        );
+        resultArray = resultArray.filter((item) => Brand.brandsArray.includes(item.brand));
 
         Type.typesArray = [];
         Type.checkTypes(Type.typeHomeCheckbox.checked, Type.typeGameCheckbox.checked, Type.typeClassicCheckbox.checked);

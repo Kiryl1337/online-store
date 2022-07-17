@@ -1,5 +1,6 @@
 import { cards } from '../../data/cards';
 import CardsView from '../cardsView/cardsView';
+import Brand from '../filters/brand';
 import Color from '../filters/color';
 import Filter from '../filters/filter';
 import Popular from '../filters/popular';
@@ -16,6 +17,7 @@ class App {
     private popular: Popular;
     private color: Color;
     private type: Type;
+    private brand: Brand;
 
     constructor() {
         this.filter = new Filter();
@@ -25,6 +27,7 @@ class App {
         this.popular = new Popular();
         this.color = new Color();
         this.type = new Type();
+        this.brand = new Brand();
     }
 
     start(): void {
@@ -41,6 +44,7 @@ class App {
         this.popular.popularFilter();
         this.color.colorsFilter();
         this.type.typesFilter();
+        this.brand.brandsFilter();
     }
 
     public dataOnload(): void {
@@ -56,6 +60,10 @@ class App {
         if (Search.search.value !== '') {
             Search.clearSearch?.classList.add('visible');
         }
+
+        Brand.brandLenovoCheckbox.checked = Boolean(localStorage.getItem('brandLenovoCheckbox'));
+        Brand.brandAsusCheckbox.checked = Boolean(localStorage.getItem('brandAsusCheckbox'));
+        Brand.brandHpCheckbox.checked = Boolean(localStorage.getItem('brandHpCheckbox'));
 
         Type.typeHomeCheckbox.checked = Boolean(localStorage.getItem('typeHomeCheckbox'));
         Type.typeGameCheckbox.checked = Boolean(localStorage.getItem('typeGameCheckbox'));
