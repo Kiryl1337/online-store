@@ -7,6 +7,7 @@ import Type from './type';
 import Brand from './brand';
 import CountSlider from '../sliders/countSlider';
 import YearSlider from '../sliders/yearSlider';
+import Sort from './sort';
 
 class Filter {
     private cardsView: CardsView;
@@ -61,6 +62,8 @@ class Filter {
                 Number(item.year) >= Number(YearSlider.minYearValue.innerHTML) &&
                 Number(item.year) <= Number(YearSlider.maxYearValue.innerHTML)
         );
+
+        Sort.sortCards(resultArray);
 
         this.renderNumArr = [];
         resultArray.forEach((item) => this.renderNumArr.push(Number(item.num) - 1));

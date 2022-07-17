@@ -5,6 +5,7 @@ import Color from '../filters/color';
 import Filter from '../filters/filter';
 import Popular from '../filters/popular';
 import Search from '../filters/search';
+import Sort from '../filters/sort';
 import Type from '../filters/type';
 import CountSlider from '../sliders/countSlider';
 import YearSlider from '../sliders/yearSlider';
@@ -18,6 +19,7 @@ class App {
     private color: Color;
     private type: Type;
     private brand: Brand;
+    private sort: Sort;
 
     constructor() {
         this.filter = new Filter();
@@ -28,6 +30,7 @@ class App {
         this.color = new Color();
         this.type = new Type();
         this.brand = new Brand();
+        this.sort = new Sort();
     }
 
     start(): void {
@@ -45,6 +48,7 @@ class App {
         this.color.colorsFilter();
         this.type.typesFilter();
         this.brand.brandsFilter();
+        this.sort.sortFilter();
     }
 
     public dataOnload(): void {
