@@ -4,6 +4,7 @@ import Brand from '../filters/brand';
 import Color from '../filters/color';
 import Filter from '../filters/filter';
 import Popular from '../filters/popular';
+import Reset from '../filters/reset';
 import Search from '../filters/search';
 import Sort from '../filters/sort';
 import Type from '../filters/type';
@@ -20,6 +21,7 @@ class App {
     private type: Type;
     private brand: Brand;
     private sort: Sort;
+    private reset: Reset;
 
     constructor() {
         this.filter = new Filter();
@@ -31,6 +33,7 @@ class App {
         this.type = new Type();
         this.brand = new Brand();
         this.sort = new Sort();
+        this.reset = new Reset();
     }
 
     start(): void {
@@ -49,6 +52,8 @@ class App {
         this.type.typesFilter();
         this.brand.brandsFilter();
         this.sort.sortFilter();
+
+        this.reset.resetFilters();
     }
 
     public dataOnload(): void {
