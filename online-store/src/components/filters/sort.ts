@@ -19,7 +19,7 @@ class Sort {
             new Filter().filterCards(cards);
         };
     }
-    public static sortCards(resultArray: Array<cardItem>): Array<cardItem> {
+    public static sortCards<T extends Array<cardItem>>(resultArray: T): T {
         Sort.sortSelect.value = localStorage.getItem('sortOption') || Sort.sortSelect.value;
         switch (Sort.sortSelect.value) {
             case SortStatus.DOWN_NAME_SORT:
