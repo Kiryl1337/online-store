@@ -8,7 +8,6 @@ enum BrandStatus {
 }
 
 class Brand {
-    public static brandsArray: string[] = [];
     public static brandLenovoCheckbox = document.querySelector('.brand-lenovo-input') as HTMLInputElement;
     public static brandAsusCheckbox = document.querySelector('.brand-asus-input') as HTMLInputElement;
     public static brandHpCheckbox = document.querySelector('.brand-hp-input') as HTMLInputElement;
@@ -30,19 +29,21 @@ class Brand {
         });
     }
 
-    public static checkBrands(brandLenovo: boolean, brandAsus: boolean, brandHp: boolean): void {
+    public static checkBrands(brandLenovo: boolean, brandAsus: boolean, brandHp: boolean): string[] {
+        const brandsArray: string[] = [];
         if (brandLenovo) {
-            Brand.brandsArray.push(BrandStatus.LENOVO);
+            brandsArray.push(BrandStatus.LENOVO);
         }
         if (brandAsus) {
-            Brand.brandsArray.push(BrandStatus.ASUS);
+            brandsArray.push(BrandStatus.ASUS);
         }
         if (brandHp) {
-            Brand.brandsArray.push(BrandStatus.HP);
+            brandsArray.push(BrandStatus.HP);
         }
-        if (Brand.brandsArray.length === 0) {
-            Brand.brandsArray.push(BrandStatus.LENOVO, BrandStatus.ASUS, BrandStatus.HP);
+        if (brandsArray.length === 0) {
+            brandsArray.push(BrandStatus.LENOVO, BrandStatus.ASUS, BrandStatus.HP);
         }
+        return brandsArray;
     }
 }
 

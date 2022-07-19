@@ -27,25 +27,29 @@ class Filter {
             );
         }
 
-        Brand.brandsArray = [];
-        Brand.checkBrands(
+        let brandsArray: string[] = [];
+        brandsArray = Brand.checkBrands(
             Brand.brandLenovoCheckbox.checked,
             Brand.brandAsusCheckbox.checked,
             Brand.brandHpCheckbox.checked
         );
-        resultArray = resultArray.filter((item) => Brand.brandsArray.includes(item.brand));
+        resultArray = resultArray.filter((item) => brandsArray.includes(item.brand));
 
-        Type.typesArray = [];
-        Type.checkTypes(Type.typeHomeCheckbox.checked, Type.typeGameCheckbox.checked, Type.typeClassicCheckbox.checked);
-        resultArray = resultArray.filter((item) => Type.typesArray.includes(item.type));
+        let typesArray: string[] = [];
+        typesArray = Type.checkTypes(
+            Type.typeHomeCheckbox.checked,
+            Type.typeGameCheckbox.checked,
+            Type.typeClassicCheckbox.checked
+        );
+        resultArray = resultArray.filter((item) => typesArray.includes(item.type));
 
-        Color.colorsArray = [];
-        Color.checkColors(
+        let colorsArray: string[] = [];
+        colorsArray = Color.checkColors(
             Color.colorWhiteCheckbox.checked,
             Color.colorBlackCheckbox.checked,
             Color.colorGrayCheckbox.checked
         );
-        resultArray = resultArray.filter((item) => Color.colorsArray.includes(item.color));
+        resultArray = resultArray.filter((item) => colorsArray.includes(item.color));
 
         if (Popular.popularCheckbox.checked) {
             resultArray = resultArray.filter((item) => item.popular);
@@ -63,7 +67,8 @@ class Filter {
                 Number(item.year) <= Number(YearSlider.maxYearValue.innerHTML)
         );
 
-        Sort.sortCards(resultArray);
+        Sort.sortSelect.value = localStorage.getItem('sortOption') || Sort.sortSelect.value;
+        Sort.sortCards(resultArray, Sort.sortSelect.value);
 
         this.renderNumArr = [];
         resultArray.forEach((item) => this.renderNumArr.push(Number(item.num) - 1));

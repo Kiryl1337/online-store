@@ -8,7 +8,6 @@ enum TypeStatus {
 }
 
 class Type {
-    public static typesArray: string[] = [];
     public static typeHomeCheckbox = document.querySelector('.type-home-input') as HTMLInputElement;
     public static typeGameCheckbox = document.querySelector('.type-game-input') as HTMLInputElement;
     public static typeClassicCheckbox = document.querySelector('.type-classic-input') as HTMLInputElement;
@@ -30,19 +29,21 @@ class Type {
         });
     }
 
-    public static checkTypes(typeHome: boolean, typeGame: boolean, typeClassic: boolean): void {
+    public static checkTypes(typeHome: boolean, typeGame: boolean, typeClassic: boolean): string[] {
+        const typesArray: string[] = [];
         if (typeHome) {
-            Type.typesArray.push(TypeStatus.HOME);
+            typesArray.push(TypeStatus.HOME);
         }
         if (typeGame) {
-            Type.typesArray.push(TypeStatus.GAME);
+            typesArray.push(TypeStatus.GAME);
         }
         if (typeClassic) {
-            Type.typesArray.push(TypeStatus.CLASSIC);
+            typesArray.push(TypeStatus.CLASSIC);
         }
-        if (Type.typesArray.length === 0) {
-            Type.typesArray.push(TypeStatus.HOME, TypeStatus.GAME, TypeStatus.CLASSIC);
+        if (typesArray.length === 0) {
+            typesArray.push(TypeStatus.HOME, TypeStatus.GAME, TypeStatus.CLASSIC);
         }
+        return typesArray;
     }
 }
 

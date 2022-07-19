@@ -8,7 +8,6 @@ enum ColorStatus {
 }
 
 class Color {
-    public static colorsArray: string[] = [];
     public static colorWhiteCheckbox = document.querySelector('.color-white-input') as HTMLInputElement;
     public static colorBlackCheckbox = document.querySelector('.color-black-input') as HTMLInputElement;
     public static colorGrayCheckbox = document.querySelector('.color-gray-input') as HTMLInputElement;
@@ -30,19 +29,21 @@ class Color {
         });
     }
 
-    public static checkColors(colorWhite: boolean, colorBlack: boolean, colorGray: boolean): void {
+    public static checkColors(colorWhite: boolean, colorBlack: boolean, colorGray: boolean): string[] {
+        const colorsArray: string[] = [];
         if (colorWhite) {
-            Color.colorsArray.push(ColorStatus.WHITE);
+            colorsArray.push(ColorStatus.WHITE);
         }
         if (colorBlack) {
-            Color.colorsArray.push(ColorStatus.BLACK);
+            colorsArray.push(ColorStatus.BLACK);
         }
         if (colorGray) {
-            Color.colorsArray.push(ColorStatus.GRAY);
+            colorsArray.push(ColorStatus.GRAY);
         }
-        if (Color.colorsArray.length === 0) {
-            Color.colorsArray.push(ColorStatus.WHITE, ColorStatus.BLACK, ColorStatus.GRAY);
+        if (colorsArray.length === 0) {
+            colorsArray.push(ColorStatus.WHITE, ColorStatus.BLACK, ColorStatus.GRAY);
         }
+        return colorsArray;
     }
 }
 

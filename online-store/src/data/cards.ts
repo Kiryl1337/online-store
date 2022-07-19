@@ -1,7 +1,7 @@
 export interface cardItem {
     num: string;
     name: string;
-    img: string;
+    img?: string;
     year: string;
     brand: string;
     color: string;
