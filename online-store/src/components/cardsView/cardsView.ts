@@ -57,6 +57,7 @@ class CardsView {
                 CardsView.setBasketCard.add(cardsNum);
             } else {
                 CardsView.basketCounter?.classList.add('basket-alert');
+                alert('Извините, все слоты заполнены');
                 setTimeout(() => {
                     CardsView.basketCounter?.classList.remove('basket-alert');
                 }, 2000);
