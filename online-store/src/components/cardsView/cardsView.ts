@@ -47,13 +47,13 @@ class CardsView {
             }
         }
     }
-    private checkCard(card: HTMLDivElement, cardsNum: string): void {
+    public checkCard(card: HTMLDivElement, cardsNum: string): void {
         if (CardsView.setBasketCard.has(cardsNum)) {
             card.classList.remove('add-to-basket');
             CardsView.setBasketCard.delete(cardsNum);
         } else {
             if (CardsView.setBasketCard.size < NUMBER_TWENTY) {
-                card.classList.add('add-to-basket');
+                card?.classList.add('add-to-basket');
                 CardsView.setBasketCard.add(cardsNum);
             } else {
                 CardsView.basketCounter?.classList.add('basket-alert');

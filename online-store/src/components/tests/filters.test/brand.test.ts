@@ -1,4 +1,4 @@
-import Brand from '../filters/brand';
+import Brand from '../../filters/brand';
 
 test('Check brands test', () => {
     expect(Brand.checkBrands(true, false, false)).toEqual(['Lenovo']);

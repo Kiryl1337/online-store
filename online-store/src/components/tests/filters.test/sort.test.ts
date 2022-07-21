@@ -1,5 +1,5 @@
-import { cardItem } from '../../data/cards';
-import Sort from '../filters/sort';
+import { cardItem } from '../../../data/cards';
+import Sort from '../../filters/sort';
 
 const testcards: Array<cardItem> = [
     {

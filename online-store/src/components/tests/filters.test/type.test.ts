@@ -1,4 +1,4 @@
-import Type from '../filters/type';
+import Type from '../../filters/type';
 
 test('Check types test', () => {
     expect(Type.checkTypes(true, false, false)).toEqual(['домашний']);
