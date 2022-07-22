@@ -14,17 +14,17 @@ class Brand {
 
     public brandsFilter() {
         Brand.brandLenovoCheckbox.addEventListener('click', () => {
-            localStorage.setItem('brandLenovoCheckbox', Brand.brandLenovoCheckbox.checked === true ? 'true' : '');
+            localStorage.setItem('brandLenovoCheckbox', Brand.brandLenovoCheckbox.checked ? 'true' : '');
             new Filter().filterCards(cards);
         });
 
         Brand.brandAsusCheckbox.addEventListener('click', () => {
-            localStorage.setItem('brandAsusCheckbox', Brand.brandAsusCheckbox.checked === true ? 'true' : '');
+            localStorage.setItem('brandAsusCheckbox', Brand.brandAsusCheckbox.checked ? 'true' : '');
             new Filter().filterCards(cards);
         });
 
         Brand.brandHpCheckbox.addEventListener('click', () => {
-            localStorage.setItem('brandHpCheckbox', Brand.brandHpCheckbox.checked === true ? 'true' : '');
+            localStorage.setItem('brandHpCheckbox', Brand.brandHpCheckbox.checked ? 'true' : '');
             new Filter().filterCards(cards);
         });
     }
@@ -40,7 +40,7 @@ class Brand {
         if (brandHp) {
             brandsArray.push(BrandStatus.HP);
         }
-        if (brandsArray.length === 0) {
+        if (!brandsArray.length) {
             brandsArray.push(BrandStatus.LENOVO, BrandStatus.ASUS, BrandStatus.HP);
         }
         return brandsArray;

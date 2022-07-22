@@ -6,7 +6,7 @@ class Popular {
 
     public popularFilter(): void {
         Popular.popularCheckbox.addEventListener('click', () => {
-            localStorage.setItem('popularCheckbox', Popular.popularCheckbox.checked === true ? 'true' : '');
+            localStorage.setItem('popularCheckbox', Popular.popularCheckbox.checked ? 'true' : '');
             new Filter().filterCards(cards);
         });
     }

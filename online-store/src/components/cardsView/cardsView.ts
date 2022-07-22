@@ -1,27 +1,28 @@
 import { cards } from '../../data/cards';
 
 const NUMBER_TWENTY = 20;
-const storeCards = document.createElement('div');
-storeCards.className = 'store-cards';
-document.querySelector('.main-container')?.append(storeCards);
+const TWO_SECONDS = 2000;
+const STORE_CARDS = document.createElement('div');
+STORE_CARDS.className = 'store-cards';
+document.querySelector('.main-container')?.append(STORE_CARDS);
 
 class CardsView {
     public static basketCounter = document.querySelector('.basket-counter');
     public static setBasketCard = new Set<string>();
 
     public createCards(array: Array<number>): void {
-        storeCards && (storeCards.innerHTML = '');
-        if (array.length === 0) {
+        STORE_CARDS && (STORE_CARDS.innerHTML = '');
+        if (!array.length) {
             const noResults = document.createElement('div');
             noResults.classList.add('no-results');
             noResults.innerHTML = 'Извините, совпадений не обнаружено';
-            storeCards?.appendChild(noResults);
+            STORE_CARDS?.appendChild(noResults);
         } else {
             for (const i of array) {
                 const storeCard = document.createElement('div');
                 storeCard.className = 'store-card';
                 storeCard.setAttribute('data-card-id', `${cards[i].num}`);
-                storeCards?.append(storeCard);
+                STORE_CARDS?.append(storeCard);
                 storeCard.innerHTML = ` <h4 class="store-card__title">${cards[i].name}</h4>
                                               <div class="store-card__img-container"><img class="store-card__img" src="
                                               ${cards[i].img}"></div>
@@ -31,7 +32,7 @@ class CardsView {
                                                   <li>Цвет: <span class="color">${cards[i].color}</span></li>
                                                   <li>Тип: <span class="type">${cards[i].type}</span></li>
                                                   <li>Популярный: <span class="popular">${
-                                                      cards[i].popular === true ? 'да' : 'нет'
+                                                      cards[i].popular ? 'да' : 'нет'
                                                   }</span></li>
                                                   <li>Количество: <span class="total-count">${
                                                       cards[i].count
@@ -60,7 +61,7 @@ class CardsView {
                 alert('Извините, все слоты заполнены');
                 setTimeout(() => {
                     CardsView.basketCounter?.classList.remove('basket-alert');
-                }, 2000);
+                }, TWO_SECONDS);
             }
         }
         CardsView.basketCounter && (CardsView.basketCounter.innerHTML = CardsView.setBasketCard.size.toString());

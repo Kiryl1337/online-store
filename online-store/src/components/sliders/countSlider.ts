@@ -22,11 +22,11 @@ class CountSlider {
                     max: Number(CountSlider.maxCountValue.innerHTML),
                 },
                 format: {
-                    to: function (value) {
+                    to: function (value: number): number {
                         return Math.trunc(value);
                     },
 
-                    from: function (value) {
+                    from: function (value: string): number {
                         return Math.trunc(Number(value));
                     },
                 },
@@ -34,12 +34,15 @@ class CountSlider {
 
             if (CountSlider.sliderCount.noUiSlider) {
                 const values: HTMLElement[] = [CountSlider.minCountValue, CountSlider.maxCountValue];
-                CountSlider.sliderCount.noUiSlider.on('update', function (items, handle) {
-                    values[handle].innerHTML = Math.round(Number(items[handle])).toString();
-                    localStorage.setItem('rangeCountMin', CountSlider.minCountValue.innerHTML);
-                    localStorage.setItem('rangeCountMax', CountSlider.maxCountValue.innerHTML);
-                    new Filter().filterCards(cards);
-                });
+                CountSlider.sliderCount.noUiSlider.on(
+                    'update',
+                    function (items: (string | number)[], handle: number): void {
+                        values[handle].innerHTML = Math.round(Number(items[handle])).toString();
+                        localStorage.setItem('rangeCountMin', CountSlider.minCountValue.innerHTML);
+                        localStorage.setItem('rangeCountMax', CountSlider.maxCountValue.innerHTML);
+                        new Filter().filterCards(cards);
+                    }
+                );
             }
         }
     }

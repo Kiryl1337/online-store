@@ -36,7 +36,7 @@ class App {
         this.reset = new Reset();
     }
 
-    start(): void {
+    public start(): void {
         this.dataOnload();
 
         this.filter.filterCards(cards);

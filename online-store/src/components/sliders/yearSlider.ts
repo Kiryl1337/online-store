@@ -22,11 +22,11 @@ class YearSlider {
                     max: Number(YearSlider.maxYearValue.innerHTML),
                 },
                 format: {
-                    to: function (value) {
+                    to: function (value: number): number {
                         return Math.trunc(value);
                     },
 
-                    from: function (value) {
+                    from: function (value: string): number {
                         return Math.trunc(Number(value));
                     },
                 },
@@ -34,12 +34,15 @@ class YearSlider {
 
             if (YearSlider.sliderYear.noUiSlider) {
                 const values: HTMLElement[] = [YearSlider.minYearValue, YearSlider.maxYearValue];
-                YearSlider.sliderYear.noUiSlider.on('update', function (items, handle) {
-                    values[handle].innerHTML = Math.round(Number(items[handle])).toString();
-                    localStorage.setItem('rangeYearMin', YearSlider.minYearValue.innerHTML);
-                    localStorage.setItem('rangeYearMax', YearSlider.maxYearValue.innerHTML);
-                    new Filter().filterCards(cards);
-                });
+                YearSlider.sliderYear.noUiSlider.on(
+                    'update',
+                    function (items: (string | number)[], handle: number): void {
+                        values[handle].innerHTML = Math.round(Number(items[handle])).toString();
+                        localStorage.setItem('rangeYearMin', YearSlider.minYearValue.innerHTML);
+                        localStorage.setItem('rangeYearMax', YearSlider.maxYearValue.innerHTML);
+                        new Filter().filterCards(cards);
+                    }
+                );
             }
         }
     }

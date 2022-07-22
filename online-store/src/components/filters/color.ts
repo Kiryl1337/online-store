@@ -14,17 +14,17 @@ class Color {
 
     public colorsFilter() {
         Color.colorWhiteCheckbox.addEventListener('click', () => {
-            localStorage.setItem('colorWhiteCheckbox', Color.colorWhiteCheckbox.checked === true ? 'true' : '');
+            localStorage.setItem('colorWhiteCheckbox', Color.colorWhiteCheckbox.checked ? 'true' : '');
             new Filter().filterCards(cards);
         });
 
         Color.colorBlackCheckbox.addEventListener('click', () => {
-            localStorage.setItem('colorBlackCheckbox', Color.colorBlackCheckbox.checked === true ? 'true' : '');
+            localStorage.setItem('colorBlackCheckbox', Color.colorBlackCheckbox.checked ? 'true' : '');
             new Filter().filterCards(cards);
         });
 
         Color.colorGrayCheckbox.addEventListener('click', () => {
-            localStorage.setItem('colorGrayCheckbox', Color.colorGrayCheckbox.checked === true ? 'true' : '');
+            localStorage.setItem('colorGrayCheckbox', Color.colorGrayCheckbox.checked ? 'true' : '');
             new Filter().filterCards(cards);
         });
     }
@@ -40,7 +40,7 @@ class Color {
         if (colorGray) {
             colorsArray.push(ColorStatus.GRAY);
         }
-        if (colorsArray.length === 0) {
+        if (!colorsArray.length) {
             colorsArray.push(ColorStatus.WHITE, ColorStatus.BLACK, ColorStatus.GRAY);
         }
         return colorsArray;

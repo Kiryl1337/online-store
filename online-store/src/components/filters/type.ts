@@ -14,17 +14,17 @@ class Type {
 
     public typesFilter() {
         Type.typeHomeCheckbox.addEventListener('click', () => {
-            localStorage.setItem('typeHomeCheckbox', Type.typeHomeCheckbox.checked === true ? 'true' : '');
+            localStorage.setItem('typeHomeCheckbox', Type.typeHomeCheckbox.checked ? 'true' : '');
             new Filter().filterCards(cards);
         });
 
         Type.typeGameCheckbox.addEventListener('click', () => {
-            localStorage.setItem('typeGameCheckbox', Type.typeGameCheckbox.checked === true ? 'true' : '');
+            localStorage.setItem('typeGameCheckbox', Type.typeGameCheckbox.checked ? 'true' : '');
             new Filter().filterCards(cards);
         });
 
         Type.typeClassicCheckbox.addEventListener('click', () => {
-            localStorage.setItem('typeClassicCheckbox', Type.typeClassicCheckbox.checked === true ? 'true' : '');
+            localStorage.setItem('typeClassicCheckbox', Type.typeClassicCheckbox.checked ? 'true' : '');
             new Filter().filterCards(cards);
         });
     }
@@ -40,7 +40,7 @@ class Type {
         if (typeClassic) {
             typesArray.push(TypeStatus.CLASSIC);
         }
-        if (typesArray.length === 0) {
+        if (!typesArray.length) {
             typesArray.push(TypeStatus.HOME, TypeStatus.GAME, TypeStatus.CLASSIC);
         }
         return typesArray;
